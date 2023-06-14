@@ -26,37 +26,29 @@ mongoose.connect(mongoURL).then(() => {
 // }
 //date.getDate() > date.registrado
 const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
-  autor: {type: String},
+  autor: { type: String, required: true},
   task: String,
+  status: Boolean,
   endAt: Boolean,
   endTime: String,
   uuid: String,
-  createdAt: new Date().toISOString(),
-  creationTime: new Date().getTime(),
+  createdAt: String,
+  creationTime: String,
   expirationTime: String,
 })
+/**
+  autor: String,
+  task: String,
+  status: Boolean,
+  endAt: Boolean,
+  endTime: String,
+  uuid: String,
+  createdAt: String,
+  creationTime: String,
+  expirationTime: String,
+ */
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 // Usuario.index({ propietario: 1 }).then(() =>{
 //   console.log("creada con exito")
 // }).catch((err) => console.log(err))
-const crear = async (req,res) => {
-  //crea el documento con los datos nuevos
-  const body = req.body;
-  console.log(body)
-  const usuario = new Usuario(body)
-  const savedUsuario = await usuario.save()//retorna una promesa
-  res.status(200).send(savedUsuario);
-  console.log("Enviado")
-}
-const buscar = async(req,res) =>{
-  const usuarios = await Usuario.find({ autor: "Rodrigo" })
-  res.status(200).send(usuarios)
-  console.log(usuarios)
-}
-// crear();
-
-module.exports = {
-  crear: crear,
-  buscar:buscar
-
-}
+export default Usuario;

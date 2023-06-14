@@ -1,6 +1,7 @@
 {
   "name": "habitwisebackend",
   "version": "1.0.0",
+  "type":"module",
   "description": "backend para habitwise",
   "main": "index.js",
   "scripts": {
