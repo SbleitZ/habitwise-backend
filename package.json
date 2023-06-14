@@ -1,0 +1,24 @@
+{
+  "name": "habitwisebackend",
+  "version": "1.0.0",
+  "description": "backend para habitwise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SbleitZ/habitwise-backend.git"
+  },
+  "author": "Sbleit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SbleitZ/habitwise-backend/issues"
+  },
+  "homepage": "https://github.com/SbleitZ/habitwise-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongoose": "^7.2.4"
+  }
+}
