@@ -1,13 +1,16 @@
-const express = require('express');
-const { crear, buscar } = require('./mongo');
+import express from "express";
+import cors from "cors";
+import taskRouter from "./src/routes/Task.js";
+import dailyRouter from "./src/routes/DailyQuotes.js";
 const app = express();
 const PORT = process.env.PORT || 8000;
 app.use(express.json());
-app.post('/crear',crear);
-app.get('/buscar/:id',buscar)
-
+app.use(cors())
+// app.post('/crear',addTask);
+// app.get('/buscar/:uid',getTaskByUid)
 //rutas
-app.use('/')
+app.use('/tasks', taskRouter)
+app.use('/daily', dailyRouter)
 app.listen(PORT,() =>{
   console.log("Server listening on port "+PORT);
 });

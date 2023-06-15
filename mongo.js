@@ -1,8 +1,10 @@
-const {MONGO_URL:mongoURL}= require('dotenv').config().parsed;
+import mongoose from "mongoose"
+// const {MONGO_URL:mongoURL}= require('dotenv').config().parsed;
+import S from "dotenv";
+const {MONGO_URL:mongoURL} = S.config().parsed
 
 
 console.log(mongoURL)
-const mongoose = require('mongoose')
 
 mongoose.connect(mongoURL).then(() => {
   console.log("\x1b[32m",'******** Conexión exitosa ********')
@@ -31,22 +33,12 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   status: Boolean,
   endAt: Boolean,
   endTime: String,
-  uuid: String,
+  uid: String,
   createdAt: String,
   creationTime: String,
   expirationTime: String,
 })
-/**
-  autor: String,
-  task: String,
-  status: Boolean,
-  endAt: Boolean,
-  endTime: String,
-  uuid: String,
-  createdAt: String,
-  creationTime: String,
-  expirationTime: String,
- */
+
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 // Usuario.index({ propietario: 1 }).then(() =>{
 //   console.log("creada con exito")
