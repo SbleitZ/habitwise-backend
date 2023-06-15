@@ -14,23 +14,35 @@ export const addTask= async (req,res) => {
   const usuario = new Usuario(body)
   const savedUsuario = await usuario.save()//retorna una promesa
   res.status(200).send(savedUsuario);
-  console.log("Enviado")
+  // console.log("Enviado")
 }
 
 export const getTaskByUid = async(req,res) =>{
   const { uid } = req.params;
-  console.log(uid)
+  // console.log(uid)
   const usuarios = await Usuario.find({ uid: uid })
   res.status(200).send(usuarios)
-  console.log(usuarios)
+  // console.log(usuarios)
 }
 
 export const getRandomQuote = (req,res) =>{
   const { language } = req.params;
   const max = languages[language].length;
   const numeroDaily = Math.floor((Math.random() * (max -0)));
-  console.log(languages[language][numeroDaily])
+  // console.log(languages[language][numeroDaily])
   // console.log(numeroDaily)
   res.status(200).json(languages[language][numeroDaily])
 }
 // crear();
+export const deleteById = async(req,res) => {
+  const { id } = req.params
+  try {
+    const deletedTask = await Usuario.findByIdAndDelete(id)
+    if (!deletedTask)
+      return res.status(404).json({ message: "Tarea no encontrada" });
+    return res.status(204).json({message:"Tarea eliminada"});
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+
+}
