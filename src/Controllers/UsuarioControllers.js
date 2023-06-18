@@ -10,7 +10,7 @@ export const addTask= async (req,res) => {
   //crea el documento con los datos nuevos
   const body = req.body;
   console.log(body)
-  body.createdAt = new Date().toISOString()
+  // body.createdAt = new Date().toISOString()
   const usuario = new Usuario(body)
   const savedUsuario = await usuario.save()//retorna una promesa
   res.status(200).send(savedUsuario);
@@ -20,8 +20,13 @@ export const addTask= async (req,res) => {
 export const getTaskByUid = async(req,res) =>{
   const { uid } = req.params;
   // console.log(uid)
-  const usuarios = await Usuario.find({ uid: uid })
-  res.status(200).send(usuarios)
+  const usuarios = await Usuario.find({ uid: uid });
+  // console.log(usuarios.sort((a,b)=> a.createdTime)).sort({creationTime:1})
+  const taskOrdenada = usuarios.sort((a,b)=> {
+    return b.creationTime - a.creationTime;
+  });
+  // console.log(taskOrdenada)
+  res.status(200).send(taskOrdenada);
   // console.log(usuarios)
 }
 

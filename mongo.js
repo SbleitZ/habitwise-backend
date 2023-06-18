@@ -40,12 +40,16 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
     type:String,
     trim:true
   },
+  note:{
+    type:String,
+    trim:true,
+  },
   icon: String,
   status: Boolean,
   endAt: Boolean,
   endTime: String,
   createdAt: String,
-  creationTime: String,
+  creationTime: Number,
   expirationTime: String,
 })
 
