@@ -33,6 +33,20 @@ export const getRandomQuote = (req,res) =>{
   // console.log(numeroDaily)
   res.status(200).json(languages[language][numeroDaily])
 }
+export const editTaskById = async(req,res) =>{
+  const { id } =req.params;
+  const body = req.body;
+  try {
+    const task = await Usuario.findById(id);
+    Object.assign(task,body);
+    await task.save();
+    return res.status(200).send({message:'Tarea actualizada'});
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send({message:'Tarea no encontrada'});
+  }
+
+}
 // crear();
 export const deleteById = async(req,res) => {
   const { id } = req.params

@@ -28,9 +28,19 @@ mongoose.connect(mongoURL).then(() => {
 // }
 //date.getDate() > date.registrado
 const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
-  // autor: { type: String, required: true},
-  uid: { type: String, required: true},
-  task: String,
+  autor: {
+    type: String,
+    required:true
+  },
+  uid: { 
+    type: String,
+    required: true
+  },
+  task: {
+    type:String,
+    trim:true
+  },
+  icon: String,
   status: Boolean,
   endAt: Boolean,
   endTime: String,
