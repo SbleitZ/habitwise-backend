@@ -46,6 +46,7 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   },
   icon: String,
   status: Boolean,
+  category:String,
   endAt: Boolean,
   endTime: String,
   createdAt: String,
