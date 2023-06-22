@@ -1,8 +1,8 @@
-import mongoose from "mongoose"
+import mongoose, { mongo } from "mongoose"
 // const {MONGO_URL:mongoURL}= require('dotenv').config().parsed;
-import S from "dotenv";
-const {MONGO_URL:mongoURL} = S.config().parsed
-
+// import S from "dotenv";
+// const {MONGO_URL:mongoURL} = S.config().parsed
+const mongoURL = process.env.MONGO_URL || "";
 
 // console.log(mongoURL)
 
