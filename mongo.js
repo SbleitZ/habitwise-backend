@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose"
+import mongoose from "mongoose"
 // const {MONGO_URL:mongoURL}= require('dotenv').config().parsed;
 // import S from "dotenv";
 // const {MONGO_URL:mongoURL} = S.config().parsed
@@ -47,6 +47,7 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   icon: String,
   status: Boolean,
   category:String,
+  checkLists:Array,
   endAt: Boolean,
   endTime: String,
   createdAt: String,

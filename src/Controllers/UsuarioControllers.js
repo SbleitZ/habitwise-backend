@@ -59,7 +59,7 @@ export const deleteById = async(req,res) => {
     const deletedTask = await Usuario.findByIdAndDelete(id)
     if (!deletedTask)
       return res.status(404).json({ message: "Tarea no encontrada" });
-    return res.status(204).json({message:"Tarea eliminada"});
+    return res.status(204).json(deletedTask);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
