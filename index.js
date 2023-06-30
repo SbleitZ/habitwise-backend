@@ -5,7 +5,11 @@ import dailyRouter from "./src/routes/DailyQuotes.js";
 const app = express();
 const PORT = process.env.PORT || 8000;
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  origin:[process.env.PUBLIC_URL,'http://localhost:3000'],
+  methods:["GET","POST","PUT","PATCH","DELETE"],
+  credentials:true,
+}))
 // app.post('/crear',addTask);
 // app.get('/buscar/:uid',getTaskByUid)
 //rutas
