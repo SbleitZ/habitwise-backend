@@ -30,7 +30,7 @@ mongoose.connect(mongoURL).then(() => {
 const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   autor: {
     type: String,
-    required:true
+    // required:true
   },
   uid: { 
     type: String,
