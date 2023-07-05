@@ -1,4 +1,4 @@
-import Usuario from "../../mongo.js";
+import {Usuario, Analytics} from "../../mongo.js";
 import en from "../DB/quotes/en.json" assert { type: "json"};
 import es from "../DB/quotes/es.json" assert { type: "json"};
 // import es from "../DB/quotes/es.json";
@@ -64,4 +64,21 @@ export const deleteById = async(req,res) => {
     return res.status(500).json({ message: error.message });
   }
 
+}
+export const addAnalytics = async(req, res) => {
+  const body = req.body;
+  
+}
+
+export const completeEveryHabits = async(req, res) => {
+  const { uid } = req.params;
+  // const body = req.body;
+  // console.log(uid)
+  try {
+    const eliminado = await Usuario.deleteMany({uid:uid,status:true});
+    return res.status(200).json(eliminado)
+  } catch (error) {
+    return res.status(404).json({message:error.message})
+
+  }
 }

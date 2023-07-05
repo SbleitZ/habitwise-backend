@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
 // const {MONGO_URL:mongoURL}= require('dotenv').config().parsed;
-// import S from "dotenv";
-// const {MONGO_URL:mongoURL} = S.config().parsed
-const mongoURL = process.env.MONGO_URL || "";
+import S from "dotenv";
+const {MONGO_URL:mongoURL} = S.config().parsed
+// const mongoURL = process.env.MONGO_URL || "";
 
 // console.log(mongoURL)
 
@@ -27,6 +27,22 @@ mongoose.connect(mongoURL).then(() => {
 //   console.log('La fecha1 es igual a fecha2');
 // }
 //date.getDate() > date.registrado
+//esto se hará con el boton de completar todo, que hará un conteo de
+// cuantas  tareas se hicieron hoy y cuantas no se hicieron
+//si existe una tarea que no este completada, entonces la racha termina, en caso contrario la racha sigue,
+
+const analyticSchema = mongoose.Schema({
+  streak:String,
+  uid:{
+    //de cada usuario para hacer la busqueda mucho más simple
+    type:String,
+    required:true,
+  },
+  categorys:Array,
+  habitChecks:Number,
+  habitNoCheck:Number,
+
+})
 const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   autor: {
     type: String,
@@ -55,8 +71,8 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   expirationTime: String,
 })
 
-const Usuario = mongoose.model('Usuario', usuarioSchema);
+export const Usuario = mongoose.model('Usuario', usuarioSchema);
+export const Analytics = mongoose.model('Analytics', analyticsSchema);
 // Usuario.index({ propietario: 1 }).then(() =>{
 //   console.log("creada con exito")
 // }).catch((err) => console.log(err))
-export default Usuario;
