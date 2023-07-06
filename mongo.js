@@ -32,22 +32,25 @@ mongoose.connect(mongoURL).then(() => {
 //si existe una tarea que no este completada, entonces la racha termina, en caso contrario la racha sigue,
 
 const analyticSchema = mongoose.Schema({
-  streak:String,
+  streak:Boolean,
   uid:{
     //de cada usuario para hacer la busqueda mucho más simple
     type:String,
     required:true,
   },
   categorys:Array,
-  habitChecks:Number,
-  habitNoCheck:Number,
+  //tareas completadas
+  habitsCompleted:Number,
+  //tareas no completadas
+  habitsNotCompleted:Number,
+  createdAt: String,
 
-})
+});
 const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   autor: {
     type: String,
     // required:true
-  },
+},
   uid: { 
     type: String,
     required: true
@@ -69,10 +72,10 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
   createdAt: String,
   creationTime: Number,
   expirationTime: String,
-})
+});
 
 export const Usuario = mongoose.model('Usuario', usuarioSchema);
-export const Analytics = mongoose.model('Analytics', analyticsSchema);
+export const Analytics = mongoose.model('Analytics', analyticSchema);
 // Usuario.index({ propietario: 1 }).then(() =>{
 //   console.log("creada con exito")
 // }).catch((err) => console.log(err))
