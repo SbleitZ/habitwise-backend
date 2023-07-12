@@ -1,11 +1,11 @@
 import {Usuario, Analytics, Streaks} from "../../mongo.js";
-import en from "../DB/quotes/en.json" assert { type: "json"};
-import es from "../DB/quotes/es.json" assert { type: "json"};
-// import es from "../DB/quotes/es.json";
-const languages = {
-  en,
-  es
-}
+// import en from "../DB/quotes/en.json" assert { type: "json"};
+// import es from "../DB/quotes/es.json" assert { type: "json"};
+// // import es from "../DB/quotes/es.json";
+// const languages = {
+//   en,
+//   es
+// }
 export const addTask= async (req,res) => {
   //crea el documento con los datos nuevos
   const body = req.body;
