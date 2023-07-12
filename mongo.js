@@ -31,6 +31,13 @@ mongoose.connect(mongoURL).then(() => {
 // cuantas  tareas se hicieron hoy y cuantas no se hicieron
 //si existe una tarea que no este completada, entonces la racha termina, en caso contrario la racha sigue,
 
+const streakSchema = mongoose.Schema({
+  uid:String,
+  days:Number,
+  lastMaxStreak:Number,
+  createdAt:String,
+})
+
 const analyticSchema = mongoose.Schema({
   streak:Boolean,
   uid:{
@@ -76,6 +83,7 @@ const usuarioSchema = mongoose.Schema({//nombre de modelo y luego el objeto
 
 export const Usuario = mongoose.model('Usuario', usuarioSchema);
 export const Analytics = mongoose.model('Analytics', analyticSchema);
+export const Streaks = mongoose.model('Streaks',streakSchema)
 // Usuario.index({ propietario: 1 }).then(() =>{
 //   console.log("creada con exito")
 // }).catch((err) => console.log(err))
