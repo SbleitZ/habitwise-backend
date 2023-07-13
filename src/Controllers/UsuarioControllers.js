@@ -79,7 +79,7 @@ export const addAnalytics = async(req,res) => {
  const analytics = await Analytics.find({uid});
  if(!body) return res.status(404).json({message: "No existe el body."})
  //si nmo tiene analytics entonces le crea una, esto pasa solo si la persona es nueva
- if(!analytics){
+ if(!analytics || analytics.length == 0){
   const analytics = await Analytics(body);
   const savedAnalytics = await analytics.save();
   const nuevaRacha = new Streaks({
