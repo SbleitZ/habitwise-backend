@@ -174,7 +174,7 @@ export const getAnalyticsByUid = async(req,res) =>{
 export const getStreaksByUid = async(req,res) =>{
   const { uid } = req.params;
   if(!uid) return res.sendStatus(404);
-  const streaksByUser = await Streaks.find({uid});
+  const streaksByUser = await Streaks.findOne({uid});
   if(!streaksByUser) return res.sendStatus(404);
   return res.status(200).send(streaksByUser)
 }
