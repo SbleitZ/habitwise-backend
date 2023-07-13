@@ -96,7 +96,7 @@ export const addAnalytics = async(req,res) => {
 //  const analyticsSorted = usuarios.sort((a,b)=> {
 //   return b.creationTime - a.creationTime;
 // });
-if(dato.create)
+
  console.log("body.createdAt",body.createdAt)
  console.log("dato.createdAt",dato.createdAt)
  const fechaRecienteAnalitica = new Date(body.createdAt)
