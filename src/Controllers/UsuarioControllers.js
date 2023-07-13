@@ -77,14 +77,28 @@ export const addAnalytics = async(req,res) => {
  const body = req.body;
  
  const analytics = await Analytics.find({uid});
-  if(!body) return res.status(404).json({message: "No existe el body."})
+ if(!body) return res.status(404).json({message: "No existe el body."})
+ //si nmo tiene analytics entonces le crea una, esto pasa solo si la persona es nueva
+ if(!analytics){
+  const analytics = await Analytics(body);
+  const savedAnalytics = await analytics.save();
+  const nuevaRacha = new Streaks({
+    uid,
+    days:0,
+    lastMaxStreak:0,
+    createdAt:body.createdAt,
+  });
+  nuevaRacha.save();
+  return res.status(200).send(nuevaRacha);
+ }
  const dato = analytics.pop();
  console.log(dato);
 //  const analyticsSorted = usuarios.sort((a,b)=> {
 //   return b.creationTime - a.creationTime;
 // });
+if(dato.create)
  console.log("body.createdAt",body.createdAt)
- console.log("body.createdAt",dato.createdAt)
+ console.log("dato.createdAt",dato.createdAt)
  const fechaRecienteAnalitica = new Date(body.createdAt)
  const fechaUltimaAnalitica = new Date(dato.createdAt)
  console.log("fechaRecienteAnalitica",fechaRecienteAnalitica)
