@@ -1,9 +1,10 @@
 import express from "express";
-import { addTask, getTaskByUid, deleteById, editTaskById, completeEveryHabits, addAnalytics, getAnalyticsByUid } from "../Controllers/UsuarioControllers.js";
+import { addTask, getTaskByUid, deleteById, editTaskById, completeEveryHabits, addAnalytics, getAnalyticsByUid, getStreaksByUid } from "../Controllers/UsuarioControllers.js";
 const router = express.Router();
 
 router.get('/:uid', getTaskByUid);
 router.get('/analytics/:uid', getAnalyticsByUid);
+router.get('/streaks/:uid', getStreaksByUid);
 router.post('/create',addTask);
 router.post('/confirm_complete/:uid',(req,res)=>{
 

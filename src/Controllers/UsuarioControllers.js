@@ -171,7 +171,13 @@ export const getAnalyticsByUid = async(req,res) =>{
   console.log(analyticsByUser)
   return res.status(200).send(analyticsByUser)
 }
-
+export const getStreaksByUid = async(req,res) =>{
+  const { uid } = req.params;
+  if(!uid) return res.sendStatus(404);
+  const streaksByUser = await Streaks.find({uid});
+  if(!streaksByUser) return res.sendStatus(404);
+  return res.status(200).send(streaksByUser)
+}
 export const completeEveryHabits = async(req, res) => {
   //verificar si tiene analiticas
 
