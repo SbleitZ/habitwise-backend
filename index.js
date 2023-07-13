@@ -33,6 +33,9 @@ app.use((req, res, next) => {
 });
 app.use('/tasks', taskRouter)
 app.use('/daily', dailyRouter)
+app.get('/',(req,res)=>{
+  res.sendStatus(200);
+})
 app.listen(PORT,() =>{
   console.log("Server listening on port "+PORT);
 });

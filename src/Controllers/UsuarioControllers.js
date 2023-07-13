@@ -141,13 +141,11 @@ export const addAnalytics = async(req,res) => {
   
    }
  }else{
+  console.log("no puedes")
   return res.status(403).send({
     message:"Debes esperar a que pase un día completo antes de hacerlo nuevamente.",
   })
  }
-
-
-
 }
 
 export const getAnalyticsByUid = async(req,res) =>{
@@ -159,6 +157,7 @@ export const getAnalyticsByUid = async(req,res) =>{
 
 export const completeEveryHabits = async(req, res) => {
   const { uid } = req.params;
+  if(!uid) return res.sendStatus(403);
   // const body = req.body;
   // console.log(uid)
   try {
