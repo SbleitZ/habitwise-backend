@@ -16,6 +16,6 @@ router.post('/confirm_complete/:uid',(req,res)=>{
 });
 router.patch('/edit/:id',editTaskById);
 router.delete('/delete/:id/',deleteById);
-router.delete('/complete/:uid',completeEveryHabits);
+// router.delete('/complete/:uid',completeEveryHabits);
 
 export default router;

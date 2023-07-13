@@ -89,6 +89,7 @@ export const addAnalytics = async(req,res) => {
     createdAt:body.createdAt,
   });
   nuevaRacha.save();
+  const eliminado = await Usuario.deleteMany({uid:uid,status:true});
   return res.status(200).send(nuevaRacha);
  }
  const dato = analytics.pop();
@@ -149,6 +150,8 @@ export const addAnalytics = async(req,res) => {
       await racha.save();
     //caso contrario se reinicia la racha y se guarda su latests
     }
+    await Usuario.deleteMany({uid:uid,status:true});
+
     return res.status(200).send(savedAnalytics);
    }catch(err){
     return res.status(403).send({message:err.message});
@@ -170,6 +173,8 @@ export const getAnalyticsByUid = async(req,res) =>{
 }
 
 export const completeEveryHabits = async(req, res) => {
+  //verificar si tiene analiticas
+
   const { uid } = req.params;
   if(!uid) return res.sendStatus(403);
   // const body = req.body;
