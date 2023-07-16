@@ -80,7 +80,7 @@ export const addAnalytics = async(req,res) => {
  if(!body) return res.status(404).json({message: "No existe el body."})
  //si nmo tiene analytics entonces le crea una, esto pasa solo si la persona es nueva
  if(!analytics || analytics.length == 0){
-  const analytics = await Analytics(body);
+  const analytics = new Analytics(body);
   const savedAnalytics = await analytics.save();
   const nuevaRacha = new Streaks({
     uid,
@@ -88,7 +88,7 @@ export const addAnalytics = async(req,res) => {
     lastMaxStreak:0,
     createdAt:body.createdAt,
   });
-  nuevaRacha.save();
+  await nuevaRacha.save();
   const eliminado = await Usuario.deleteMany({uid:uid,status:true});
   return res.status(200).send(nuevaRacha);
  }
@@ -108,7 +108,7 @@ export const addAnalytics = async(req,res) => {
  {
   console.log("puedes completar todo")
   try{  
-    const analytics = await Analytics(body);
+    const analytics = new Analytics(body);
     const savedAnalytics = await analytics.save();
     const racha = await Streaks.findOne({uid})
     if(!racha){
@@ -118,7 +118,7 @@ export const addAnalytics = async(req,res) => {
         lastMaxStreak:0,
         createdAt:body.createdAt,
       });
-      nuevaRacha.save();
+      await nuevaRacha.save();
       return res.status(200).send(nuevaRacha);
     }
     if(body.streak){
