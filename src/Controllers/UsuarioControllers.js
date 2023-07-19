@@ -80,75 +80,47 @@ export const addAnalytics = async(req,res) => {
  if(!body) return res.status(404).json({message: "No existe el body."})
  //si nmo tiene analytics entonces le crea una, esto pasa solo si la persona es nueva
  if(!analytics || analytics.length == 0){
-  const analytics = new Analytics(body);
+  const analytics = await Analytics(body);
   const savedAnalytics = await analytics.save();
   const nuevaRacha = new Streaks({
     uid,
-    days:0,
-    lastMaxStreak:0,
+    days:1,
+    lastMaxStreak:1,
     createdAt:body.createdAt,
   });
-  await nuevaRacha.save();
+  nuevaRacha.save();
   const eliminado = await Usuario.deleteMany({uid:uid,status:true});
   return res.status(200).send(nuevaRacha);
  }
  const dato = analytics.pop();
  console.log(dato);
-//  const analyticsSorted = usuarios.sort((a,b)=> {
-//   return b.creationTime - a.creationTime;
-// });
-
- console.log("body.createdAt",body.createdAt)
- console.log("dato.createdAt",dato.createdAt)
  const fechaRecienteAnalitica = new Date(body.createdAt)
  const fechaUltimaAnalitica = new Date(dato.createdAt)
- console.log("fechaRecienteAnalitica",fechaRecienteAnalitica)
- console.log("fechaUltimaAnalitica",fechaUltimaAnalitica)
  if(fechaRecienteAnalitica > fechaUltimaAnalitica && fechaRecienteAnalitica.getDate() > fechaUltimaAnalitica.getDate())
  {
   console.log("puedes completar todo")
   try{  
-    const analytics = new Analytics(body);
+    const analytics = await Analytics(body);
     const savedAnalytics = await analytics.save();
     const racha = await Streaks.findOne({uid})
     if(!racha){
       const nuevaRacha = new Streaks({
         uid,
-        days:0,
-        lastMaxStreak:0,
+        days:1,
+        lastMaxStreak:1,
         createdAt:body.createdAt,
       });
-      await nuevaRacha.save();
+      nuevaRacha.save();
       return res.status(200).send(nuevaRacha);
     }
     if(body.streak){
-      //no completo todo
-      //la racha se va
-      //si no tiene racha registrada, entonces se crea.
-      // if(!racha){
-      //   new Streaks({
-      //     uid,
-      //     days:0,
-      //     lastMaxStreak:0,
-      //     createdAt:body.createdAt,
-      //   });
-      // }
       racha.days += 1;
       racha.lastMaxStreak +=1;
       await racha.save();
     }else{
       console.log("pero entro acá")
-      // if(!racha){
-      //   new Streaks({
-      //     uid,
-      //     days:0,
-      //     lastMaxStreak:0,
-      //     createdAt:body.createdAt,
-      //   });
-      // }
       racha.days = 0;
       await racha.save();
-    //caso contrario se reinicia la racha y se guarda su latests
     }
     await Usuario.deleteMany({uid:uid,status:true});
 
