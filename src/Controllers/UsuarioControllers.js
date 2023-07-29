@@ -150,7 +150,7 @@ export const getStreaksByUid = async(req,res) =>{
   if(!streaksByUser) return res.sendStatus(404);
   return res.status(200).send(streaksByUser)
 }
-export const deleteEveryTaskByUd = async(req,res) =>{
+export const deleteEveryTaskByUid = async(req,res) =>{
   //boton eliminar todos
   const { uid } = req.params;
   if(!uid) return res.sendStatus(403);
