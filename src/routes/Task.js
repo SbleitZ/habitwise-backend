@@ -1,5 +1,5 @@
 import express from "express";
-import { addTask, getTaskByUid, editTaskById, completeEveryHabits, addAnalytics, getAnalyticsByUid, getStreaksByUid,deleteEveryTaskById } from "../Controllers/UsuarioControllers.js";
+import { addTask, getTaskByUid, editTaskById, addAnalytics, getAnalyticsByUid, getStreaksByUid,deleteEveryTaskByUid, deleteById } from "../Controllers/UsuarioControllers.js";
 const router = express.Router();
 
 router.get('/:uid', getTaskByUid);
@@ -16,8 +16,10 @@ router.post('/confirm_complete/:uid',(req,res)=>{
   }
 });
 router.patch('/edit/:id',editTaskById);
-//router.delete('/delete/:id/',deleteById);
-router.delete('/delete/:uid/',deleteEveryTaskById);
+//borrar solo una
+router.delete('/delete/:id/',deleteById);
+//borrar todas
+router.delete('/delete/:uid/',deleteEveryTaskByUid);
 // router.delete('/complete/:uid',completeEveryHabits);
 
 export default router;
