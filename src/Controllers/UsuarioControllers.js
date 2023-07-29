@@ -96,7 +96,8 @@ export const addAnalytics = async(req,res) => {
  console.log(dato);
  const fechaRecienteAnalitica = new Date(body.createdAt)
  const fechaUltimaAnalitica = new Date(dato.createdAt)
- if(fechaRecienteAnalitica > fechaUltimaAnalitica && fechaRecienteAnalitica.getDate() > fechaUltimaAnalitica.getDate())
+ //en el caso en que sea el 1 de diciembre y la ultima analitica fue el 29 de noviembre se usa fechaRecienteAnalitica.getMonth() > fechaUltimaAnalitica.getMonth()
+ if((fechaRecienteAnalitica > fechaUltimaAnalitica && fechaRecienteAnalitica.getDate() > fechaUltimaAnalitica.getDate()) || fechaRecienteAnalitica.getMonth() > fechaUltimaAnalitica.getMonth())
  {
   console.log("puedes completar todo")
   try{  
@@ -122,7 +123,9 @@ export const addAnalytics = async(req,res) => {
       racha.days = 0;
       await racha.save();
     }
-    await Usuario.deleteMany({uid:uid,status:true});
+    // await Usuario.deleteMany({uid:uid,status:true});
+    //se actualiza todos los que esten en verdadero para finalmente cambiarlos a que no se han completado.
+    await Usuario.updateMany({uid:uid,status:true},{status:false});
 
     return res.status(200).send(savedAnalytics);
    }catch(err){
