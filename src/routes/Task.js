@@ -19,7 +19,7 @@ router.patch('/edit/:id',editTaskById);
 //borrar solo una
 router.delete('/delete/:id/',deleteById);
 //borrar todas
-router.delete('/delete/:uid/',deleteEveryTaskByUid);
+router.delete('/deleteAll/:uid/',deleteEveryTaskByUid);
 // router.delete('/complete/:uid',completeEveryHabits);
 
 export default router;
