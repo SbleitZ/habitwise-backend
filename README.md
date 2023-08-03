@@ -1,4 +1,5 @@
 # Habitwise Backend
+El deploy esta hecho en <a href="https://render.com">Render</a>.
 ## Datos relevantes
 ![imagen](https://github.com/SbleitZ/habitwise-backend/assets/72667973/d68c2f0a-10de-4aa0-80d8-16d6b15ba6f5)
 ### Como se usaron los datos
