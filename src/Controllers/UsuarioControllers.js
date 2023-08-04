@@ -9,24 +9,34 @@ import {Usuario, Analytics, Streaks} from "../../mongo.js";
 export const addTask= async (req,res) => {
   //crea el documento con los datos nuevos
   const body = req.body;
+  if(!body) return res.sendStatus(403);
   console.log(body)
-  // body.createdAt = new Date().toISOString()
-  const usuario = new Usuario(body)
-  const savedUsuario = await usuario.save()//retorna una promesa
-  res.status(200).send(savedUsuario);
-  // console.log("Enviado")
+  try {
+    // body.createdAt = new Date().toISOString()
+    const usuario = new Usuario(body)
+    const savedUsuario = await usuario.save()//retorna una promesa
+    return res.status(200).send(savedUsuario);
+    // console.log("Enviado")
+  } catch (error) {
+    return res.sendStatus(404);
+  }
 }
 
 export const getTaskByUid = async(req,res) =>{
   const { uid } = req.params;
+  if(!uid) return res.sendStatus(404);
   // console.log(uid)
-  const usuarios = await Usuario.find({ uid: uid });
-  // console.log(usuarios.sort((a,b)=> a.createdTime)).sort({creationTime:1})
-  const taskOrdenada = usuarios.sort((a,b)=> {
-    return b.creationTime - a.creationTime;
-  });
-  // console.log(taskOrdenada)
-  res.status(200).send(taskOrdenada);
+  try {
+    const usuarios = await Usuario.find({ uid: uid });
+    // console.log(usuarios.sort((a,b)=> a.createdTime)).sort({creationTime:1})
+    const taskOrdenada = usuarios.sort((a,b)=> {
+      return b.creationTime - a.creationTime;
+    });
+    // console.log(taskOrdenada)
+    return res.status(200).send(taskOrdenada);
+  } catch (error) {
+    return res.sendStatus(403);
+  }
   // console.log(usuarios)
 }
 
@@ -36,7 +46,7 @@ export const getRandomQuote = (req,res) =>{
   const numeroDaily = Math.floor((Math.random() * (max -0)));
   // console.log(languages[language][numeroDaily])
   // console.log(numeroDaily)
-  res.status(200).json(languages[language][numeroDaily])
+  return res.status(200).json(languages[language][numeroDaily])
 }
 export const editTaskById = async(req,res) =>{
   const { id } =req.params;
