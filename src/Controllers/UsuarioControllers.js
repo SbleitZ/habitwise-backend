@@ -125,11 +125,16 @@ export const addAnalytics = async(req,res) => {
       return res.status(200).send(nuevaRacha);
     }
     if(body.streak){
+      if(racha.days == racha.lastMaxStreak){
+        //significa que la racha actual alcanzo a la mejor racha
+        racha.lastMaxStreak += 1;
+      }
       racha.days += 1;
-      racha.lastMaxStreak +=1;
+      // racha.lastMaxStreak +=1;
       await racha.save();
     }else{
       console.log("pero entro acá")
+      racha.lastMaxStreak = racha.days;
       racha.days = 0;
       await racha.save();
     }
