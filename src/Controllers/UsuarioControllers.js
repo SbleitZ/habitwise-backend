@@ -134,7 +134,7 @@ export const addAnalytics = async(req,res) => {
       await racha.save();
     }else{
       console.log("pero entro acá")
-      racha.lastMaxStreak = racha.days;
+      // racha.lastMaxStreak = racha.days;
       racha.days = 0;
       await racha.save();
     }
